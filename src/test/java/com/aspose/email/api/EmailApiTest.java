@@ -1,32 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.aspose.email.api;
 
-import com.aspose.storage.api.StorageApi;
-import com.aspose.client.ApiInvoker;
-import com.aspose.client.ApiException;
-import com.aspose.email.model.EmailDocument;
-import com.aspose.email.model.Link;
-import com.aspose.email.model.EmailDocumentResponse;
-import com.aspose.email.model.EmailProperty;
-import com.aspose.email.model.EmailProperties;
-import com.aspose.email.model.EmailPropertyResponse;
-import com.aspose.email.model.ResponseMessage;
+import static org.junit.Assert.assertNull;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.aspose.client.ApiException;
+import com.aspose.email.model.EmailDocument;
+import com.aspose.email.model.EmailDocumentResponse;
+import com.aspose.email.model.EmailProperties;
+import com.aspose.email.model.EmailProperty;
+import com.aspose.email.model.EmailPropertyResponse;
+import com.aspose.email.model.Link;
+import com.aspose.email.model.ResponseMessage;
+import com.aspose.storage.api.StorageApi;
 
 /**
  *
- * @author SQL
+ * @author Imran Anwar
+ * @author Farooq Sheikh
  */
 public class EmailApiTest {
 
@@ -48,21 +47,14 @@ public class EmailApiTest {
 
 	@Before
 	public void setUp() {
-		emailApi = new EmailApi();
-		storageApi = new StorageApi();
-
-		emailApi.setBasePath("http://api.aspose.com/v1.1");
-		emailApi.getInvoker().addDefaultHeader("apiKey", apiKey);
-		emailApi.getInvoker().addDefaultHeader("appSID", appSID);
-
-		storageApi.setBasePath(emailApi.getBasePath());
-		storageApi.getInvoker().addDefaultHeader("apiKey", apiKey);
-		storageApi.getInvoker().addDefaultHeader("appSID", appSID);
-
+		
+	        emailApi = new EmailApi("http://api.aspose.com/v1.1",apiKey,appSID);
+		storageApi = new StorageApi("http://api.aspose.com/v1.1",apiKey,appSID);
+		
 		try {
-			//System.out.println(getClass().getResource("/Sampleocr.bmp").toURI());
-			storageApi.PutCopy("email_test.eml", "", "", "", "", new File(getClass().getResource("/email_test.eml").toURI()));
-			storageApi.PutCopy("email_test_attach.eml", "", "", "", "", new File(getClass().getResource("/email_test_attach.eml").toURI()));
+			System.out.println(getClass().getResource("/email_test.eml").toURI());
+			storageApi.PutCreate("email_test.eml", "", "", new File(getClass().getResource("/email_test.eml").toURI()));
+	                storageApi.PutCreate("email_test_attach.eml", "", "", new File(getClass().getResource("/email_test_attach.eml").toURI()));
 		} catch (java.net.URISyntaxException uriExp) {
 			System.out.println("uriExp:" + uriExp);
 		}
