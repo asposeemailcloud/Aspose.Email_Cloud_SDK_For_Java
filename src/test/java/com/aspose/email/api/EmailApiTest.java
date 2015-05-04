@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.aspose.client.ApiException;
+import com.aspose.email.client.ApiException;
 import com.aspose.email.model.EmailDocument;
 import com.aspose.email.model.EmailDocumentResponse;
 import com.aspose.email.model.EmailProperties;
